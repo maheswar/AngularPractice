@@ -1,0 +1,30 @@
+<div>
+    <fieldset>
+        <legend>Login</legend>
+        <div>
+            <table>
+                <tr>
+                    <td>UserName</td>
+                    <td><input type="text" [(ngModel)]="username"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><br></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="text" [(ngModel)]="pswd"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><br></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Login" (click)="login()"></td>
+                    <td><input type="button" value="SignUp" (click)="signup()"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><br><br></td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
+</div>

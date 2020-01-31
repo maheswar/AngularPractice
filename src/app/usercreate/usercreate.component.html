@@ -1,0 +1,85 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="false">
+    First Name : <input type="text" id="firstname" required [(ngModel)]="firstName" name="firstName"/><br/><br/>
+   
+    Last Name :<input type="text" id="lastname"  ngModel name="last name"/><br/><br/>
+    Email Id :<input type="email" id="email"  ngModel name="email" email required/><br/><br/>
+    Password :<input type="password" id="pswd" ngModel name="pswd"/><br/><br/>
+    Confirm Password :<input type="password" id="cpswd"/><br/><br/>
+    Mobile :<input type="text" id="mobileno"/><br/><br/>
+    <button type="submit" [disabled]="!f.valid">Save</button>
+</form>
+
+<div>New Form</div>
+<form [formGroup]="reactFormGroup" (ngSubmit)="onReactSubmit()">
+    <table>
+        <tr>
+            <td appHighlight>User Name</td>
+            <td><input type="text" formControlName="userName"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" formControlName="email"></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td><input type="radio" value="male" formControlName="gender"> Male<br>
+                <input type="radio" value="female" formControlName="gender"> Female</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>
+                <table formGroupName="address">
+                    <tr>
+                        <td>
+                            Street
+                        </td>
+                        <td>
+                            <input type="text" formControlName="street">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            City
+                        </td>
+                        <td>
+                            <input type="text" formControlName="city">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            State
+                        </td>
+                        <td>
+                            <input type="text" formControlName="state">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Country
+                        </td>
+                        <td>
+                            <select formControlName="country">
+                                <option>India</option>
+                                <option>Netherlands</option>
+                                <option>USA</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" #hobbie><input type="button" (click)="addHobbie(hobbie)" value="Add Hobbie">
+            </td>
+        </tr>
+        <tr *ngFor="let c of this.reactFormGroup.get('hobbies').controls">
+            <td>{{c.value}}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><button type="submit">Register</button></td>
+        </tr>
+    </table>
+
+</form>
