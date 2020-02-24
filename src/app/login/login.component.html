@@ -1,18 +1,18 @@
 <div>
     <fieldset>
         <legend>Login</legend>
-        <div>
+        <div (keyup.enter)="login()">
             <table>
                 <tr>
                     <td>UserName</td>
-                    <td><input type="text" [(ngModel)]="username"/></td>
+                    <td><input type="text" [(ngModel)]="username" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><br></td>
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td><input type="text" [(ngModel)]="pswd"/></td>
+                    <td><input type="text" [(ngModel)]="pswd" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><br></td>
