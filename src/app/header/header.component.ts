@@ -8,28 +8,29 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit,OnDestroy {
-  isAuthenticated:boolean;
-  logOutSub:Subscription;
-  logInSub:Subscription;
-  constructor(private userService:UserService,private auth:AuthService,private route:Router) { }
+export class HeaderComponent implements OnInit, OnDestroy {
+  isAuthenticated: boolean;
+  logOutSub: Subscription;
+  logInSub: Subscription;
+  constructor(private userService: UserService, private auth: AuthService, private route: Router) { }
 
   ngOnInit(): void {
-    this.logOutSub=this.userService.logOut.subscribe(e=>{
-      this.auth.loginKey=""
-      this.route.navigate(['/login'])
-    })
-    this.logInSub=this.userService.logInSub.subscribe(e=>{
-      this.isAuthenticated=true;
-      this.route.navigate(['/recipes'])
-    })
+    this.logOutSub = this.userService.logOut.subscribe(e => {
+      this.auth.loginKey = '';
+      this.route.navigate(['/login']);
+    });
+    this.logInSub = this.userService.logInSub.subscribe(e => {
+      this.isAuthenticated = true;
+      this.auth.loginKey = e.Token;
+      this.route.navigate(['/recipes']);
+    });
   }
-  
-  ngOnDestroy(){
+
+  ngOnDestroy() {
     this.logOutSub.unsubscribe();
   }
-  logout(){
-    this.isAuthenticated=false;
-    this.userService.logout(this.auth.loginKey);    
+  logout() {
+    this.isAuthenticated = false;
+    this.userService.logout();
   }
 }

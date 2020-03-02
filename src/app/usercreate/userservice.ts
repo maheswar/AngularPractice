@@ -22,8 +22,8 @@ export class UserService {
         this.lstUsers.push({ UserName: username, Password: pswd, Token: token } as User);
     }
 
-    logout(token: string) {
-        this.lstUsers = this.lstUsers.filter(e => e.Token != token)
+    logout() {
+        // this.lstUsers = this.lstUsers.filter(e => e.Token !== token);
         localStorage.removeItem('userData');
         this.logOut.next(true);
     }
@@ -35,9 +35,15 @@ export class UserService {
             if (this.isValidUser(userInfo)) {
                 this.logInSub.next(userInfo);
             } else {
-                this.logout('');
+                this.logout();
             }
         }
+    }
+
+    autoLogout(duration: number) {
+        setTimeout(() => {
+            this.logout();
+        }, duration);
     }
 
     isValidUser(userInfo: User) {
@@ -49,6 +55,7 @@ export class UserService {
 
     login(username, pswd) {
         const that = this;
+        // tslint:disable-next-line: only-arrow-functions
         return new Promise(function (res, rej) {
             setTimeout(() => {
                 const userInfo = that.lstUsers.filter(e => e.UserName.toLocaleLowerCase() === username.toLocaleLowerCase()
@@ -60,7 +67,7 @@ export class UserService {
                     d2.setMinutes(d1.getMinutes() + that.loginTime);
                     userData.ExpiryDate = d2;
 
-                    that.logInSub.next();
+                    that.logInSub.next(userData);
                     localStorage.setItem('userData', window.btoa(JSON.stringify(userData)));
                     res(userData.Token);
                 } else {

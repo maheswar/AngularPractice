@@ -8,27 +8,29 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username:string;
-  pswd:string;
-
-  constructor(private userService:UserService,private auth:AuthService) { }
+  username: string;
+  pswd: string;
+  showDialog = true;
+  constructor(private userService: UserService, private auth: AuthService) { }
 
   ngOnInit() {
   }
 
-  login(){
-    var that=this;
-    this.userService.login(this.username,this.pswd).then(function(d:string){
-      that.auth.loginKey=d;      
-      alert("Log in Successfull")
-   }).catch(function(e){
-     alert(e);
-   })
+  login() {
+    const that = this;
+    this.userService.login(this.username, this.pswd).then((d: string) => {
+      that.auth.loginKey = d;
+      alert('Log in Successfull');
+    }).catch((e) => {
+      alert(e);
+    });
   }
- 
-  signup(){
-    this.userService.addUser(this.username,this.pswd);
-    this.username="";
-    this.pswd="";
+  hideDialog() {
+    this.showDialog = false;
+  }
+  signup() {
+    this.userService.addUser(this.username, this.pswd);
+    this.username = '';
+    this.pswd = '';
   }
 }

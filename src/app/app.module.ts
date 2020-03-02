@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -23,6 +23,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptors } from './interceptors/req.intercenptor';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './usercreate/userservice';
+import { AuthGuard } from './auth/auth.guard';
+import { AlertdialogComponent } from './alertdialog/alertdialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { UserService } from './usercreate/userservice';
     RecipeStartComponent,
     RecipeEditComponent,
     UsercreateComponent,
-    LoginComponent
+    LoginComponent,
+    AlertdialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,12 +51,12 @@ import { UserService } from './usercreate/userservice';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService,UserService,
+  providers: [ShoppingListService, UserService, AuthGuard, AuthService,
     {
-    provide:HTTP_INTERCEPTORS,
-    multi:true,
-    useClass:RequestInterceptors
-  }],
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: RequestInterceptors
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

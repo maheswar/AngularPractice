@@ -7,11 +7,12 @@ import { UserService } from './usercreate/userservice';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private userService:UserService){}
+  loadedFeature = 'recipe';
+
+  constructor(private userService: UserService) { }
   ngOnInit(): void {
     this.userService.autoLogin();
   }
-  loadedFeature = 'recipe';
 
   onNavigate(feature: string) {
     this.loadedFeature = feature;

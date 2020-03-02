@@ -28,3 +28,4 @@
         </div>
     </fieldset>
 </div>
+<app-alertdialog *ngIf="showDialog" [message]="'testing'" (closeDialogEmitter)="hideDialog()"></app-alertdialog>
